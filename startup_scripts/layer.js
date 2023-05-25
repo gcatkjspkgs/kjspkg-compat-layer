@@ -82,8 +82,8 @@ if (typeof StartupEvents != "undefined") {
     "jei.add.fluids": JEIEvents.hideFluids,
     "jei.information": JEIEvents.information,
 
-    "rei.hide.items": REIEvents.hide("item"),
-    "rei.add.items": REIEvents.add("item"),
+    "rei.hide.items": (callback) => REIEvents.hide("item", callback),
+    "rei.add.items": (callback) => REIEvents.add("item", callback),
     "rei.information": REIEvents.information,
     "rei.remove.categories": REIEvents.removeCategories,
     "rei.group": REIEvents.groupEntries,
