@@ -1,6 +1,6 @@
 # KJSPKG Compatibility Layer
 
-Backward compatibility that Lat can only dream of :heh:
+Backwards compatibility that Lat can only dream of :heh:
 
 ## Features
 
