@@ -4,13 +4,40 @@ Backwards compatibility that Lat can only dream of :heh:
 
 ## Features
 
-### KJS6 and LegacyKJS onEvent sync
+### onEvent sync
 
 ```js
-// KubeJS 6 can now use the old onEvent function added by KubeJS Legacy
-// To do that, simply use the global.kjspkgCompatLayer.legacyOnEvent event instead of the regular onEvent
-// This function is also added to KubeJS Legacy, so you don't have to write two different cases for different versions
+// KJSPKG compat layer adds a function that acts like the old onEvent
+// If used on Legacy, it will just redirect to the regular onEvent function
+// If used with KJS6, it will find the correct event function and call that instead
 global.kjspkgCompatLayer.legacyOnEvent("player.tick", event => {
     console.log("do stuff!")
 })
+```
+
+## Forge event sync
+
+```js
+// You can do a similar thing with forge events
+global.kjspkgCompatLayer.legacyForgeEvent("some.forge.event.class.name", event => {
+    console.log("do more stuff!")
+})
+```
+
+### Reflection sync
+
+```js
+// KJSPKG compat layer also adds a simliar redirect function for java reflection functions
+// On legacy, it will call the java() function. On KJS6, it will call Java.loadClass()
+const someJavaThing = global.kjspkgCompatLayer.legacyJava("super.cool.and.long.class.name")
+```
+
+### Getting the version ID
+
+```js
+// If you couldn't find a function that suits your needs, you can always just check the version you're running
+// To do that, you can get the version id by simply checking the versionId variable
+// 6 - 1.16.5, 8 - 1.18.2, 9 - 1.19.2
+if (global.kjspkgCompatLayer.versionId<9) console.log("Legacy") 
+else console.log("KJS6+") 
 ```

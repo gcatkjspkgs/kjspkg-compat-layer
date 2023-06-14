@@ -1,4 +1,4 @@
-global.kjspkgCompatLayer = {};
+global.kjspkgCompatLayer = {}
 
 if (typeof StartupEvents != "undefined") {
     let links = {
@@ -74,6 +74,13 @@ if (typeof StartupEvents != "undefined") {
 
         "entity_type.tags": callback => ServerEvents.tags("entity_type", callback),
 
+        "generic.loot_tables": ServerEvents.genericLootTables,
+        "block.loot_tables": ServerEvents.blockLootTables,
+        "entity.loot_tables": ServerEvents.entityLootTables,
+        "gift.loot_tables": ServerEvents.giftLootTables,
+        "fishing.loot_tables": ServerEvents.fishingLootTables,
+        "chest.loot_tables": ServerEvents.chestLootTables,
+
         "jei.subtypes": JEIEvents.subtypes,
         "jei.hide.items": JEIEvents.hideItems,
         "jei.hide.fluids": JEIEvents.hideFluids,
@@ -86,16 +93,26 @@ if (typeof StartupEvents != "undefined") {
         "rei.information": REIEvents.information,
         "rei.remove.categories": REIEvents.removeCategories,
         "rei.group": REIEvents.groupEntries,
-    };
+    }
+
+    global.kjspkgCompatLayer.versionId = 9
 
     global.kjspkgCompatLayer.legacyOnEvent = (event, callback) => {
-        if (!Object.keys(links).includes(event)) return;
-        return links[event](callback);
-    };
+        if (!Object.keys(links).includes(event)) return
+        return links[event](callback)
+    }
+    global.kjspkgCompatLayer.legacyJava = classname => Java.loadClass(classname)
+    global.kjspkgCompatLayer.legacyForgeEvent = (event, callback) => ForgeEvents.onEvent(event, callback)
 } else {
+    global.kjspkgCompatLayer.versionId = typeof Component == "undefined" ? 6 : 8
+
     global.kjspkgCompatLayer.legacyOnEvent = (event, callback) => {
-        if (typeof Component == "undefined")
-            event = event.replace("level", "world");
-        return onEvent(event, callback);
-    };
+        if (global.kjspkgCompatLayer.versionId==6) event = event.replace("level", "world")
+        return onEvent(event, callback)
+    }
+    global.kjspkgCompatLayer.legacyJava = classname => Java(classname)
+    global.kjspkgCompatLayer.legacyForgeEvent = (event, callback) => {
+        if (global.kjspkgCompatLayer.versionId==6) return
+        return onForgeEvent(event, callback)
+    }
 }
