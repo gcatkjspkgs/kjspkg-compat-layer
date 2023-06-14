@@ -1,3 +1,5 @@
+//priority: 10000
+
 global.kjspkgCompatLayer = {}
 
 if (typeof StartupEvents != "undefined") {
