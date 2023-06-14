@@ -1,6 +1,11 @@
 global.kjspkgCompatLayer = {}
 
 if (typeof StartupEvents != "undefined") {
+    const emptyfunc = callback => {}
+
+    let jeiloaded = Platform.isLoaded("jei")
+    let reiloaded = Platform.isLoaded("roughlyenoughitems")
+
     let links = {
         "init": StartupEvents.init,
         "postinit": StartupEvents.postInit,
@@ -81,18 +86,18 @@ if (typeof StartupEvents != "undefined") {
         "fishing.loot_tables": ServerEvents.fishingLootTables,
         "chest.loot_tables": ServerEvents.chestLootTables,
 
-        "jei.subtypes": JEIEvents.subtypes,
-        "jei.hide.items": JEIEvents.hideItems,
-        "jei.hide.fluids": JEIEvents.hideFluids,
-        "jei.add.items": JEIEvents.addItems,
-        "jei.add.fluids": JEIEvents.hideFluids,
-        "jei.information": JEIEvents.information,
+        "jei.subtypes": jeiloaded ? JEIEvents.subtypes : emptyfunc,
+        "jei.hide.items": jeiloaded ? JEIEvents.hideItems : emptyfunc,
+        "jei.hide.fluids": jeiloaded ? JEIEvents.hideFluids : emptyfunc,
+        "jei.add.items": jeiloaded ? JEIEvents.addItems : emptyfunc,
+        "jei.add.fluids": jeiloaded ? JEIEvents.hideFluids : emptyfunc,
+        "jei.information": jeiloaded ? JEIEvents.information : emptyfunc,
 
-        "rei.hide.items": callback => REIEvents.hide("item", callback),
-        "rei.add.items": callback => REIEvents.add("item", callback),
-        "rei.information": REIEvents.information,
-        "rei.remove.categories": REIEvents.removeCategories,
-        "rei.group": REIEvents.groupEntries,
+        "rei.hide.items": reiloaded ? callback => REIEvents.hide("item", callback) : emptyfunc,
+        "rei.add.items": reiloaded ? callback => REIEvents.add("item", callback) : emptyfunc,
+        "rei.information": reiloaded ? REIEvents.information : emptyfunc,
+        "rei.remove.categories": reiloaded ? REIEvents.removeCategories : emptyfunc,
+        "rei.group": reiloaded ? REIEvents.groupEntries : emptyfunc,
     }
 
     global.kjspkgCompatLayer.versionId = 9
