@@ -1,7 +1,7 @@
 global.kjspkgCompatLayer = {}
 
 if (typeof StartupEvents != "undefined") {
-    const emptyfunc = callback => {}
+    let emptyfunc = callback => {}
 
     let jeiloaded = Platform.isLoaded("jei")
     let reiloaded = Platform.isLoaded("roughlyenoughitems")
