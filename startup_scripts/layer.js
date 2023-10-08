@@ -117,7 +117,7 @@ if (typeof StartupEvents != "undefined") {
         if (global.kjspkgCompatLayer.versionId==6) event = event.replace("level", "world")
         return onEvent(event, callback)
     }
-    global.kjspkgCompatLayer.legacyJava = classname => Java(classname)
+    global.kjspkgCompatLayer.legacyJava = classname => java(classname)
     global.kjspkgCompatLayer.legacyForgeEvent = (event, callback) => {
         if (global.kjspkgCompatLayer.versionId==6) return
         return onForgeEvent(event, callback)
