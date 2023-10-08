@@ -2,7 +2,7 @@
     "author": "G_cat",
     "description": "A KJSPKG library that simplifes making packages for both KubeJS 6 and Legacy. This is a library, it doesn't do anything by itself. Docs: https://github.com/gcatkjspkgs/kjspkg-compat-layer",
     
-    "versions": [6, 8, 9],
+    "versions": [6, 8, 9, 10],
     "modloaders": ["forge", "fabric"],
     "dependencies": [],
     "incompatibilities": []

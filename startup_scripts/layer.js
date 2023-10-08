@@ -102,7 +102,7 @@ if (typeof StartupEvents != "undefined") {
         "rei.group": reiloaded ? REIEvents.groupEntries : emptyfunc,
     }
 
-    global.kjspkgCompatLayer.versionId = 9
+    global.kjspkgCompatLayer.versionId = Platform.getMcVersion().startsWith("1.19") ? 9 : 10
 
     global.kjspkgCompatLayer.legacyOnEvent = (event, callback) => {
         if (!Object.keys(links).includes(event)) return
